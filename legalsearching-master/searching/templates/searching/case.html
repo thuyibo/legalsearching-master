@@ -1,0 +1,25 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'searching/style.css' %}">
+<link rel="stylesheet" href="{% static 'searching/mystyle.css' %}">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>司法搜索</title>
+</head>
+<body>
+<div class="contentdiv">
+{{text}}
+</div>
+<div class="relateddiv">
+    <a href = "{%url 'home' %}"class="mybutton homebut">返回</a>
+    <h3>关联案件</h3>
+    {% for a in related %}
+        <div class="reselement">
+            <a href = "{% url 'case' a.path %}">
+                {{a.title}}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+</body>
