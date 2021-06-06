@@ -3,16 +3,14 @@ es = Elasticsearch('localhost:9200')
 
 mappings = {
             "mappings": {
-                "type_doc_test": {
-                    "properties": {
-                        "path": {
-                            "type": "keyword",
-                            "index": True
-                        },
-                        "content": {
-                            "type": "text",
-                            "index": True
-                        }
+                "properties": {
+                    "path": {
+                        "type": "keyword",
+                        "index": True
+                    },
+                    "content": {
+                        "type": "text",
+                        "index": True
                     }
                 }
             }

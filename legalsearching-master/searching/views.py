@@ -26,7 +26,7 @@ def esgetresult(keyword, tags):
     }
     returnlist = []
     try:
-        res = es.search(index="legalsearch",doc_type="doc_type_test",body=doc)
+        res = es.search(index="legalsearch",body=doc)
         hits = res['hits']['hits']
         for item in hits:
             hitspath =item['_source']['path']
@@ -57,7 +57,7 @@ def esgetcase(path):
 
 #返回所有可能的标签
 def gettagcandidates():
-    return ["asd", "aaaaaaaaaa", "asffff", "221","寻衅滋事罪", "恶势力"]
+    return ["北京", "陕西", "河北", "刑事案件", "寻衅滋事罪", "恶势力", "交通肇事罪","故意杀人罪", "纠纷"]
 
 #根据查询词和标签过滤数组返回结果
 #keyword是一个string，查询词
@@ -102,7 +102,12 @@ def home(request):
         'tagcandidates': tagcandidates
     })
 def viewcase(request, str):
-    text, related = getcase(str)
+    textraw, related = getcase(str)
+    try:
+        text = re.search(r'<QW nameCN="全文" oValue="(.*?)" value',textraw).group(0)[len('<QW nameCN="全文" oValue="'):-7]
+        text = text.replace(' ', '<br>')
+    except:
+        text = textraw
     return render(request, 'searching/case.html',{
             'text': text,
             'related': related

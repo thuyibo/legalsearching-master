@@ -4,7 +4,7 @@ es = Elasticsearch('localhost:9200')
 
 import os
 
-g = os.walk(r"C:\Users\Yibo\Downloads\数据集") #改成数据集所在的绝对路径，运行需要等待一段时间，稍安勿躁
+g = os.walk(r"F:\lawdata") #改成数据集所在的绝对路径，运行需要等待一段时间，稍安勿躁
 
 cnt = 0
 for path,dir_list,file_list in g:
@@ -20,6 +20,6 @@ for path,dir_list,file_list in g:
                     "path": fpath,
                     "content": f
                 }
-                es.index(index="legalsearch",doc_type="doc_type_test",body = action)
+                es.index(index="legalsearch",body = action)
                 cnt += 1
                 print(cnt,fpath)
